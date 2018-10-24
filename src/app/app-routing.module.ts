@@ -1,14 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, PreloadAllModules, NoPreloading } from '@angular/router';
 import { AboutComponent } from './about/about.component';
+import { CustomersComponent } from './customers/customers.component';
+import { OrdersComponent } from './orders/orders.component';
 
 // import { PreloadModulesStrategy } from './core/strategies/preload-modules.strategy';
 
 const app_routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/customers' },
-  { path: 'customers/:id', loadChildren: 'app/customer/customer.module#CustomerModule' },
-  { path: 'customers', loadChildren: 'app/customers/customers.module#CustomersModule' },
-  { path: 'orders', loadChildren: 'app/orders/orders.module#OrdersModule' },
+  // { path: 'customers/:id', loadChildren: 'app/customer/customer.module#CustomerModule' },
+  { path: 'customers', component: CustomersComponent, children: [
+    { path: '**', redirectTo: '' } 
+    ]},
+  // { path: 'customers', loadChildren: 'app/customers/customers.module#CustomersModule' },
+  // { path: 'orders', loadChildren: 'app/orders/orders.module#OrdersModule' },
+  { path: 'orders', component: OrdersComponent, children: [
+    { path: '**', redirectTo: '' } 
+    ]},
   { path: 'about', component: AboutComponent, children: [
     { path: '**', redirectTo: '' } 
     ]},
